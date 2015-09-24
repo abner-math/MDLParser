@@ -57,12 +57,12 @@ public class MDLAnim extends MDLBoundedObject {
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);
-		parse(token.second, interval, rarity, moveSpeed, nonLooping);
+		String contents = parse(token.second, interval, rarity, moveSpeed, nonLooping);
 		setInterval(interval.getValues());
 		setRarity(rarity.getValue());
 		setMoveSpeed(moveSpeed.getValue());
 		setNonLooping(nonLooping.getValue());
-		return new Pair<String, String>(token.first, "");
+		return new Pair<String, String>(token.first, contents);
 	}
 	
 	@Override

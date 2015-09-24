@@ -6,7 +6,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ MDLBooleanTest.class, MDLNumberArrayTest.class, MDLNumberTest.class, MDLStringTest.class,
-		MDLVersionTest.class, MDLAnimTest.class, MDLSequencesTest.class, MDLGlobalSequencesTest.class })
+		MDLVersionTest.class, MDLAnimTest.class, MDLSequencesTest.class, MDLGlobalSequencesTest.class, 
+		MDLBitmapTest.class, MDLTexturesTest.class, MDLEnumTest.class })
 public class AllTests {
 
 }

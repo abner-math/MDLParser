@@ -31,9 +31,9 @@ public class MDLVersion extends MDLObject {
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);
-		parse(token.second, formatVersion);
+		String contents = parse(token.second, formatVersion);
 		setFormatVersion(formatVersion.getValue());
-		return new Pair<String, String>(token.first, "");
+		return new Pair<String, String>(token.first, contents);
 	}
 	
 	@Override

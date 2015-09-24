@@ -11,6 +11,7 @@ public class MDLModel extends MDLBoundedObject {
 	private MDLVersion version;
 	private MDLSequences sequences;
 	private MDLGlobalSequences globalSequences;
+	private MDLTextures textures;
 	
 	public MDLModel() {
 		super("Model");
@@ -19,6 +20,7 @@ public class MDLModel extends MDLBoundedObject {
 			this.version = new MDLVersion();
 			this.sequences = new MDLSequences();
 			this.globalSequences = new MDLGlobalSequences();
+			this.textures = new MDLTextures();
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new RuntimeException(e);
 		}
@@ -70,9 +72,9 @@ public class MDLModel extends MDLBoundedObject {
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);
-		parse(token.second, blendTime);
-		input = parse(token.first, version, sequences, globalSequences);
-		return new Pair<String, String>(input, "");
+		String contents = parse(token.second, blendTime);
+		input = parse(token.first, version, sequences, globalSequences, textures);
+		return new Pair<String, String>(input, contents);
 	}
 	
 	@Override
@@ -102,7 +104,7 @@ public class MDLModel extends MDLBoundedObject {
 		StringBuilder sb = new StringBuilder();
 		sb.append(version.toMDL());
 		sb.append(print(new StringBuilder()));
-		sb.append(print(sequences, globalSequences));
+		sb.append(print(sequences, globalSequences, textures));
 		return sb.toString();
 	}
 	

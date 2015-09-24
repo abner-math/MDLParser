@@ -5,14 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MDLArray<T extends MDLElement> extends MDLObject {
+public abstract class MDLObjectArray<T extends MDLElement> extends MDLObject {
 
 	protected Constructor<T> constructor;
 	protected Object[] constructorParams;
 	protected boolean showQuantity;
 	protected List<T> objects;
 	
-	public MDLArray(String name, boolean showQuantity, Constructor<T> constructor, Object... constructorParams) {
+	public MDLObjectArray(String name, boolean showQuantity, Constructor<T> constructor, Object... constructorParams) {
 		super(name);
 		setConstructor(constructor);
 		setConstructorParams(constructorParams);

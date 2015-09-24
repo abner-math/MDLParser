@@ -29,7 +29,7 @@ public abstract class MDLField implements MDLElement {
 	
 	@Override
 	public Pair<Integer, Integer> getTokenDelimiter(String input) {
-		String regex = "(^|(\\W+))" + name + "((\\s*,)|(\\W+(([^\\}]*\\}\\s*)|([^(,||\\{|\\})]+))?\\s*,))";
+		String regex = "(^|(\\W+))" + name + "\\s*((\\{[^(\\{|\\})]*\\})|([^(,|\\{|\\}|\\w)][^(,|\\{|\\})]+))?\\s*,";
 		Matcher matches = Pattern.compile(regex).matcher(input);
 		if (!matches.find()) {
 			return null;
