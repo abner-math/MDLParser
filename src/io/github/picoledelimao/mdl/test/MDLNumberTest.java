@@ -26,7 +26,7 @@ public class MDLNumberTest {
 			Assert.fail(e.getMessage());
 		}
 		Assert.assertEquals(8.0, e2.getValue(), 0);
-		Assert.assertEquals("float2 8.0,\n", e2.toMDL());
+		Assert.assertEquals("float2 8,\n", e2.toMDL());
 		String medium1 = "v12 8, v1 88,";
 		MDLNumber<Integer> m1 = new MDLNumber<>("v1", 0, true);
 		try {
@@ -55,7 +55,7 @@ public class MDLNumberTest {
 		Assert.assertEquals(0.8, n2.getValue(), 0);
 		Assert.assertEquals("ana 0.8,\n", n2.toMDL());
 		n2.setValue(0.0);
-		Assert.assertEquals("ana 0.0,\n", n2.toMDL());
+		Assert.assertEquals("ana 0,\n", n2.toMDL());
 		MDLNumber<Double> notFound = new MDLNumber<>("Notfound", 0.0, false);
 		try {
 			notFound.parse(hard2);
@@ -66,7 +66,7 @@ public class MDLNumberTest {
 		Assert.assertEquals("", notFound.toMDL());
 		notFound.setValue(10.0);
 		Assert.assertEquals(10.0, notFound.getValue(), 0);
-		Assert.assertEquals("Notfound 10.0,\n", notFound.toMDL());
+		Assert.assertEquals("Notfound 10,\n", notFound.toMDL());
 		notFound.setValue(0.0);
 		Assert.assertEquals(0, notFound.getValue(), 0);
 		Assert.assertEquals("", notFound.toMDL());

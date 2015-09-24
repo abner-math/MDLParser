@@ -9,11 +9,19 @@ public class MDLModel extends MDLBoundedObject {
 
 	private MDLNumber<Integer> blendTime;
 	private MDLVersion version;
+	private MDLSequences sequences;
+	private MDLGlobalSequences globalSequences;
 	
 	public MDLModel() {
 		super("Model");
-		this.blendTime = new MDLNumber<>("BlendTime", 0, false);
-		this.version = new MDLVersion();
+		try {
+			this.blendTime = new MDLNumber<>("BlendTime", 0, false);
+			this.version = new MDLVersion();
+			this.sequences = new MDLSequences();
+			this.globalSequences = new MDLGlobalSequences();
+		} catch (NoSuchMethodException | SecurityException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public int getNumGeosets() {
@@ -62,11 +70,8 @@ public class MDLModel extends MDLBoundedObject {
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);
-		String contents = token.second;
-		contents = blendTime.parse(contents).second;
-		
-		input = version.parse(input).first;
-		
+		parse(token.second, blendTime);
+		input = parse(token.first, version, sequences, globalSequences);
 		return new Pair<String, String>(input, "");
 	}
 	
@@ -90,6 +95,15 @@ public class MDLModel extends MDLBoundedObject {
 		numRibbonEmitters.setValue(getNumRibbonEmitters());
 		return super.print(print(numGeosets, numGeosetAnims, numHelpers, numBones, numAttachments, numParticleEmitters,
 				numParticleEmitters2, numRibbonEmitters, blendTime, minimumExtent, maximumExtent, boundsRadius));
+	}
+	
+	@Override
+	public String toMDL() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(version.toMDL());
+		sb.append(print(new StringBuilder()));
+		sb.append(print(sequences, globalSequences));
+		return sb.toString();
 	}
 	
 }

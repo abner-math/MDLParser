@@ -9,8 +9,8 @@ public class MDLAnimTest {
 
 	@Test
 	public void test() {
-		String anim1 = "Anim \"Stand\" {\n\tInterval { 100.1, 1600 },\n\tMinimumExtent { -132, -129, -0.605469 },\n\tMaximumExtent { 128, 131, 206 },\n\tBoundsRadius 184.026,\n}";
-		String anim2 = "Anim \"Attack - 1\" {\n\tInterval { 4000, 5000 },\n\tRarity 100,\n\tMoveSpeed 100,\n\tNonLooping,\n\tMinimumExtent { -132, -129, -0.605469 },\n\tMaximumExtent { 128, 131, 206 },\n\tBoundsRadius 184.026,\n}";
+		String anim1 = "Anim \"Stand\" {\n\tInterval { 100.1, 1600 },\n\tMinimumExtent { -132, -129, -0.605469 },\n\tMaximumExtent { 128, 131, 206 },\n\tBoundsRadius 184.026,\n}\n";
+		String anim2 = "Anim \"Attack - 1\" {\n\tInterval { 4000, 5000 },\n\tRarity 100,\n\tMoveSpeed 100,\n\tNonLooping,\n\tMinimumExtent { -132, -129, -0.605469 },\n\tMaximumExtent { 128, 131, 206 },\n\tBoundsRadius 184.026,\n}\n";
 		MDLAnim a1 = new MDLAnim();
 		try {
 			a1.parse(anim1);

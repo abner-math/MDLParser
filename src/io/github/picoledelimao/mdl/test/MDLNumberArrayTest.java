@@ -26,7 +26,7 @@ public class MDLNumberArrayTest {
 			Assert.fail(e.getMessage());
 		}
 		Assert.assertArrayEquals(new Double[]{-5.0,  8.9}, e2.getValues()); 
-		Assert.assertEquals("array3 { -5.0, 8.9 },\n", e2.toMDL());
+		Assert.assertEquals("array3 { -5, 8.9 },\n", e2.toMDL());
 		String medium1 = "aa { 8 }, aaa { 10 }, a{ 5 },";
 		MDLNumberArray<Integer> m1 = new MDLNumberArray<>("a", Integer.class, 1);
 		try {

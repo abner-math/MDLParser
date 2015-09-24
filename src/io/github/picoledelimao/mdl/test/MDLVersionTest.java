@@ -9,7 +9,7 @@ public class MDLVersionTest {
 
 	@Test
 	public void test() {
-		String contents = "Version {\n\tFormatVersion 800,\n}";
+		String contents = "Version {\n\tFormatVersion 800,\n}\n";
 		MDLVersion version = new MDLVersion();
 		try {
 			version.parse(contents);

@@ -9,7 +9,7 @@ public class MDLNumber<T extends Number & Comparable> extends MDLNumeric<T> impl
 	private T defaultValue;
 	private boolean required;
 	
-	public MDLNumber(String name, T defaultValue, boolean required) {
+	public MDLNumber(String name, T defaultValue, Boolean required) {
 		super(name, (Class<T>)getActualClass(defaultValue));
 		setValue(defaultValue);
 		setDefaultValue(defaultValue);

@@ -17,7 +17,7 @@ public class MDLBooleanTest {
 			Assert.fail(e.getMessage());
 		}
 		Assert.assertTrue(b1.getValue());
-		Assert.assertEquals("Test1,", b1.toMDL());
+		Assert.assertEquals("Test1,\n", b1.toMDL());
 		String s2 = "Test1,Test2,";
 		MDLBoolean b2 = new MDLBoolean("Test3");
 		try {
@@ -35,7 +35,7 @@ public class MDLBooleanTest {
 			Assert.fail(e.getMessage());
 		}
 		Assert.assertTrue(b3.getValue());
-		Assert.assertEquals("Test11,", b3.toMDL());
+		Assert.assertEquals("Test11,\n", b3.toMDL());
 	}
 
 }

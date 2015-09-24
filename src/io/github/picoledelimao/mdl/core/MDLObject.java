@@ -7,7 +7,7 @@ public abstract class MDLObject extends MDLField {
 
 	public static final String VALUE_REGEX = "((\"[^\"]*\")|((\\s+" + MDLNumeric.NUMBER_REGEX + ")+))";
 	
-	private String value;
+	protected String value;
 	
 	public MDLObject(String name) {
 		super(name);
@@ -48,17 +48,21 @@ public abstract class MDLObject extends MDLField {
 
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
-		Pair<String, String> token = super.parse(input);
-		String contents = token.second;
-		int parenthesisStartOffset = contents.indexOf("{") + 1;
-		int parenthesisEndOffset = contents.length() - 1;
-		String strValue = contents.substring(0, parenthesisStartOffset - 1);
-		Matcher valueMatches = Pattern.compile(VALUE_REGEX).matcher(strValue);
-		if (valueMatches.find()) {
-			setValue(valueMatches.group().replaceFirst("^\\s*", ""));
+		try {
+			Pair<String, String> token = super.parse(input);
+			String contents = token.second;
+			int parenthesisStartOffset = contents.indexOf("{") + 1;
+			int parenthesisEndOffset = contents.length() - 1;
+			String strValue = contents.substring(0, parenthesisStartOffset - 1);
+			Matcher valueMatches = Pattern.compile(VALUE_REGEX).matcher(strValue);
+			if (valueMatches.find()) {
+				setValue(valueMatches.group().replaceFirst("^\\s*", ""));
+			}
+			contents = contents.substring(parenthesisStartOffset, parenthesisEndOffset);
+			return new Pair<String, String>(token.first, contents);
+		} catch (MDLNotFoundException e) {
+			return new Pair<String, String>(input, "");
 		}
-		contents = contents.substring(parenthesisStartOffset, parenthesisEndOffset);
-		return new Pair<String, String>(token.first, contents);
 	}
 
 	private String indent(StringBuilder sb) {
@@ -72,7 +76,7 @@ public abstract class MDLObject extends MDLField {
 	
 	protected StringBuilder print(StringBuilder sb) {
 		return new StringBuilder(name.isEmpty() ? "" : name + " ").append((value == null || value.isEmpty()) ? "" : value + " ")
-			.append("{\n").append(sb.toString().isEmpty() ? "" : indent(sb)).append("}");
+			.append("{\n").append(sb.toString().isEmpty() ? "" : indent(sb)).append("}\n");
 	}
 	
 	protected String parse(String contents, MDLElement... elements) throws MDLNotFoundException, MDLParserErrorException {
