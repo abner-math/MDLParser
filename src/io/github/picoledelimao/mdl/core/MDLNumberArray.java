@@ -12,7 +12,7 @@ public class MDLNumberArray<T extends Number & Comparable> extends MDLNumeric<T>
 	private T[] values;
 	private int size;
 	
-	public MDLNumberArray(String name, Class<T> clazz, int size) {
+	public MDLNumberArray(String name, Class<T> clazz, Integer size) {
 		super(name, clazz);
 		setSize(size);
 	}

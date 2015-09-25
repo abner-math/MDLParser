@@ -16,20 +16,24 @@ public abstract class MDLField implements MDLElement {
 	}
 	
 	public void setName(String newName) {
-		Matcher matches = Pattern.compile("^\\w*$").matcher(newName);
+		Matcher matches = Pattern.compile("^[\\w|:]*$").matcher(newName);
 		if (!matches.find()) {
-			throw new RuntimeException("Illegal field name. Only [a-zA-Z_0-9] is supported.");
+			throw new RuntimeException("Illegal field name. Only [a-zA-Z_0-9:] is supported.");
 		}
 		name = newName;
 	}
 	 
-	protected String sliceString(String s, Pair<Integer, Integer> bounds) {
+	public static String sliceString(String s, Pair<Integer, Integer> bounds) {
 		return s.substring(0, bounds.first) + s.substring(bounds.second);
+	}
+	
+	public static String getFieldRegex(String fieldName) {
+		return "(^|(\\W+))" + fieldName + "\\s*((\\{[^(\\{|\\})]*\\})|([^(,|\\{|\\}|\\w)][^(,|\\{|\\})]+))?\\s*,";
 	}
 	
 	@Override
 	public Pair<Integer, Integer> getTokenDelimiter(String input) {
-		String regex = "(^|(\\W+))" + name + "\\s*((\\{[^(\\{|\\})]*\\})|([^(,|\\{|\\}|\\w)][^(,|\\{|\\})]+))?\\s*,";
+		String regex = getFieldRegex(name);
 		Matcher matches = Pattern.compile(regex).matcher(input);
 		if (!matches.find()) {
 			return null;
