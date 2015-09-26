@@ -1,4 +1,4 @@
-package io.github.pcioledelimao.mdl;
+package io.github.picoledelimao.mdl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -39,10 +39,6 @@ public class MDLAnimatedObject<T extends MDLNumeric> implements MDLElement {
 		return showStatic;
 	}
 	
-	public void setStatic(boolean showStatic) {
-		this.showStatic = showStatic;
-	}
-
 	public Object getValue() {
 		return showStatic ? staticValue : animatedValues;
 	}

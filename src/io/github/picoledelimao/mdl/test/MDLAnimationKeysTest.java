@@ -5,8 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import io.github.pcioledelimao.mdl.MDLAnimationKeys;
-import io.github.pcioledelimao.mdl.MDLInterpolationType;
+import io.github.picoledelimao.mdl.MDLAnimationKeys;
+import io.github.picoledelimao.mdl.MDLInterpolationType;
 import io.github.picoledelimao.mdl.core.MDLNumber;
 import io.github.picoledelimao.mdl.core.MDLNumberArray;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;

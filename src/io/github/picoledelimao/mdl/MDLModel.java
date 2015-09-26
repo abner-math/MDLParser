@@ -1,4 +1,4 @@
-package io.github.pcioledelimao.mdl;
+package io.github.picoledelimao.mdl;
 
 import io.github.picoledelimao.mdl.core.MDLNotFoundException;
 import io.github.picoledelimao.mdl.core.MDLNumber;
@@ -12,6 +12,7 @@ public class MDLModel extends MDLBoundedObject {
 	private MDLSequences sequences;
 	private MDLGlobalSequences globalSequences;
 	private MDLTextures textures;
+	private MDLMaterials materials;
 	
 	public MDLModel() {
 		super("Model");
@@ -21,6 +22,7 @@ public class MDLModel extends MDLBoundedObject {
 			this.sequences = new MDLSequences();
 			this.globalSequences = new MDLGlobalSequences();
 			this.textures = new MDLTextures();
+			this.materials = new MDLMaterials();
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new RuntimeException(e);
 		}
@@ -73,7 +75,7 @@ public class MDLModel extends MDLBoundedObject {
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);
 		String contents = parse(token.second, blendTime);
-		input = parse(token.first, version, sequences, globalSequences, textures);
+		input = parse(token.first, version, sequences, globalSequences, textures, materials);
 		return new Pair<String, String>(input, contents);
 	}
 	
@@ -104,7 +106,7 @@ public class MDLModel extends MDLBoundedObject {
 		StringBuilder sb = new StringBuilder();
 		sb.append(version.toMDL());
 		sb.append(print(new StringBuilder()));
-		sb.append(print(sequences, globalSequences, textures));
+		sb.append(print(sequences, globalSequences, textures, materials));
 		return sb.toString();
 	}
 	

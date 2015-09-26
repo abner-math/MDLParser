@@ -1,4 +1,4 @@
-package io.github.pcioledelimao.mdl;
+package io.github.picoledelimao.mdl;
 
 import io.github.picoledelimao.mdl.core.MDLNotFoundException;
 import io.github.picoledelimao.mdl.core.MDLNumber;

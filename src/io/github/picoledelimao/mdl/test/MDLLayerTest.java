@@ -3,13 +3,13 @@ package io.github.picoledelimao.mdl.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import io.github.pcioledelimao.mdl.MDLLayer;
+import io.github.picoledelimao.mdl.MDLLayer;
 
 public class MDLLayerTest {
 
 	@Test
 	public void test() {
-		String s1 = "Layer {\n\tFilterMode Blend,\n\tAlpha 4 {\n\t\tBezier,\n\t\tGlobalSeqId 0,\n\t\t0: 10,\n\t\t\tInTan 0,\n\t\t\tOutTan 0,\n\t\t100: 50,\n\t\t\tInTan 0,\n\t\t\tOutTan 0,\n\t\t150: 50,\n\t\t\tInTan 70,\n\t\t\tOutTan 770,\n\t\t170: 50,\n\t\t\tInTan 10,\n\t\t\tOutTan 110,\n\t}\n\tTextureID 1 {\n\t\tDontInterp,\n\t\t0: 0,\n\t}\n\tTwoSided,\n\tUnshaded,\n\tUnfogged,\n\tSphereEnvMap,\n\tNoDepthTest,\n\tNoDepthSet,\n}\n";
+		String s1 = "Layer {\n\tFilterMode Modulate,\n\tAlpha 4 {\n\t\tBezier,\n\t\tGlobalSeqId 0,\n\t\t0: 10,\n\t\t\tInTan 0,\n\t\t\tOutTan 0,\n\t\t100: 50,\n\t\t\tInTan 0,\n\t\t\tOutTan 0,\n\t\t150: 50,\n\t\t\tInTan 70,\n\t\t\tOutTan 770,\n\t\t170: 50,\n\t\t\tInTan 10,\n\t\t\tOutTan 110,\n\t}\n\tTextureID 1 {\n\t\tDontInterp,\n\t\t0: 0,\n\t}\n\tTwoSided,\n\tUnshaded,\n\tUnfogged,\n\tSphereEnvMap,\n\tNoDepthTest,\n\tNoDepthSet,\n}\n";
 		MDLLayer layer1 = new MDLLayer();
 		try {
 			layer1.parse(s1);

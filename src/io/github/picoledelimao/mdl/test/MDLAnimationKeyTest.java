@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import io.github.pcioledelimao.mdl.MDLAnimationKey;
+import io.github.picoledelimao.mdl.MDLAnimationKey;
 import io.github.picoledelimao.mdl.core.MDLNumber;
 import io.github.picoledelimao.mdl.core.MDLNumberArray;
 import io.github.picoledelimao.mdl.core.Pair;

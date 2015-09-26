@@ -3,7 +3,7 @@ package io.github.picoledelimao.mdl.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import io.github.pcioledelimao.mdl.MDLSequences;
+import io.github.picoledelimao.mdl.MDLSequences;
 
 public class MDLSequencesTest {
 

@@ -1,4 +1,4 @@
-package io.github.pcioledelimao.mdl;
+package io.github.picoledelimao.mdl;
 
 public enum MDLInterpolationType {
 	

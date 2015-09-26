@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import io.github.pcioledelimao.mdl.MDLAnimatedObject;
+import io.github.picoledelimao.mdl.MDLAnimatedObject;
 import io.github.picoledelimao.mdl.core.MDLNumber;
 
 public class MDLAnimatedObjectTest {
