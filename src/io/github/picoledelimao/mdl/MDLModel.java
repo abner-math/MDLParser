@@ -17,6 +17,7 @@ public class MDLModel extends MDLBoundedObject {
 	private MDLTextureAnims textureAnims;
 	private MDLObjectArray<MDLGeoset> geosets;
 	private MDLObjectArray<MDLGeosetAnim> geosetAnims;
+	private MDLObjectArray<MDLBone> bones;
 	
 	public MDLModel() {
 		super("Model");
@@ -30,6 +31,7 @@ public class MDLModel extends MDLBoundedObject {
 			this.textureAnims = new MDLTextureAnims();
 			this.geosets = new MDLObjectArray<>("", false, MDLGeoset.class.getDeclaredConstructor());
 			this.geosetAnims = new MDLObjectArray<>("", false, MDLGeosetAnim.class.getDeclaredConstructor());
+			this.bones = new MDLObjectArray<>("", false, MDLBone.class.getDeclaredConstructor());
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new RuntimeException(e);
 		}
@@ -40,7 +42,7 @@ public class MDLModel extends MDLBoundedObject {
 	}
 	
 	public int getNumGeosetAnims() {
-		return 0;
+		return geosetAnims.getObjects().size();
 	}
 	
 	public int getNumHelpers() {
@@ -48,7 +50,7 @@ public class MDLModel extends MDLBoundedObject {
 	}
 	
 	public int getNumBones() {
-		return 0;
+		return bones.getObjects().size();
 	}
 	
 	public int getNumAttachments() {
@@ -83,7 +85,7 @@ public class MDLModel extends MDLBoundedObject {
 		Pair<String, String> token = super.parse(input);
 		String contents = parse(token.second, blendTime);
 		input = parse(token.first, version, sequences, globalSequences, textures, materials, textureAnims, 
-				geosets, geosetAnims);
+				geosets, geosetAnims, bones);
 		return new Pair<String, String>(input, contents);
 	}
 
@@ -92,7 +94,8 @@ public class MDLModel extends MDLBoundedObject {
 		StringBuilder sb = new StringBuilder();
 		sb.append(version.toMDL());
 		sb.append(print(new StringBuilder()));
-		sb.append(print(sequences, globalSequences, textures, materials, textureAnims, geosets, geosetAnims));
+		sb.append(print(sequences, globalSequences, textures, materials, textureAnims, geosets, geosetAnims,
+				bones));
 		return sb.toString();
 	}
 	

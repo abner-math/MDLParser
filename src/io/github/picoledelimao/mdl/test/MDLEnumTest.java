@@ -4,19 +4,16 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import io.github.picoledelimao.mdl.core.MDLEnum;
+import io.github.picoledelimao.mdl.core.MDLNotFoundException;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 
 public class MDLEnumTest {
 
 	@Test
-	public void test() throws MDLParserErrorException {
+	public void test() throws MDLParserErrorException, MDLNotFoundException {
 		String easy1Correct = "Linear,";
 		MDLEnum e1 = new MDLEnum("", true, "None", "Linear", "Hermite", "Bezier") { };
-		try {
-			e1.parse(easy1Correct);
-		} catch (Exception e) { 
-			Assert.fail(e.getMessage());
-		}
+		e1.parse(easy1Correct);
 		Assert.assertEquals("Linear", e1.getValue());
 		Assert.assertEquals("None", e1.getDefaultValue());
 		e1.setRequired(false);

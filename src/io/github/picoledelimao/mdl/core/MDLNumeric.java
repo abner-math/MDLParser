@@ -56,9 +56,9 @@ public abstract class MDLNumeric<T extends Number & Comparable> extends MDLField
 			if (value - (int)value == 0.0f) {
 				return String.valueOf((int)value);
 			}
-			if (value < 1e-7) {
-				return String.valueOf(value).replaceAll("E", "e");
-			}
+			//if (Math.abs(value) < 1e-7) {
+			//	return String.valueOf(value).replaceAll("E", "e");
+			//}
 			int numFractionDigits = 10;
 			for (int i = 9; i > 0; i--) {
 				float reduced = Float.valueOf(String.format(Locale.ENGLISH, "%." + i + "f", value));

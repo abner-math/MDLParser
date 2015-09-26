@@ -40,25 +40,29 @@ public class MDLBooleanArray extends MDLField {
 	
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
-		Pair<String, String> token = super.parse(input);
-		Matcher matches = Pattern.compile(ARRAY_REGEX).matcher(token.second);
-		if (!matches.find()) {
-			throw new MDLParserErrorException("Could not parse number array for field " + name + ".");
-		}
 		for (MDLBoolean b : values) {
 			b.setValue(false);
 		}
-		String contents = matches.group();
-		matches = Pattern.compile("\\w+").matcher(contents);
-		while (matches.find()) {
-			String name = matches.group();
-			for (MDLBoolean b : values) {
-				if (name.equals(b.getName())) {
-					b.setValue(true);
+		try {
+			Pair<String, String> token = super.parse(input);
+			Matcher matches = Pattern.compile(ARRAY_REGEX).matcher(token.second);
+			if (!matches.find()) {
+				throw new MDLParserErrorException("Could not parse number array for field " + name + ".");
+			}
+			String contents = matches.group();
+			matches = Pattern.compile("\\w+").matcher(contents);
+			while (matches.find()) {
+				String name = matches.group();
+				for (MDLBoolean b : values) {
+					if (name.equals(b.getName())) {
+						b.setValue(true);
+					}
 				}
 			}
+			return new Pair<String, String>(token.first, "");
+		} catch (MDLNotFoundException e) {
+			return new Pair<String, String>(input, "");
 		}
-		return new Pair<String, String>(token.first, "");
 	}
 	
 	@Override

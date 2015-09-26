@@ -4,19 +4,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import io.github.picoledelimao.mdl.MDLAnim;
+import io.github.picoledelimao.mdl.core.MDLNotFoundException;
+import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 
 public class MDLAnimTest {
 
 	@Test
-	public void test() {
+	public void test() throws MDLNotFoundException, MDLParserErrorException {
 		String anim1 = "Anim \"Stand\" {\n\tInterval { 100.1, 1600 },\n\tMinimumExtent { -132, -129, -0.605469 },\n\tMaximumExtent { 128, 131, 206 },\n\tBoundsRadius 184.026,\n}\n";
 		String anim2 = "Anim \"Attack - 1\" {\n\tInterval { 4000, 5000 },\n\tRarity 100,\n\tMoveSpeed 100,\n\tNonLooping,\n\tMinimumExtent { -132, -129, -0.605469 },\n\tMaximumExtent { 128, 131, 206 },\n\tBoundsRadius 184.026,\n}\n";
 		MDLAnim a1 = new MDLAnim();
-		try {
-			a1.parse(anim1);
-		} catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
+		a1.parse(anim1);
 		Assert.assertEquals(anim1, a1.toMDL());
 		Assert.assertArrayEquals(new Float[]{100.1f, 1600f}, a1.getInterval());
 		Assert.assertArrayEquals(new Float[]{-132f, -129f, -0.605469f}, a1.getMinimumExtent());
@@ -27,11 +25,7 @@ public class MDLAnimTest {
 		Assert.assertFalse(a1.isNonLooping());
 		Assert.assertEquals("\"Stand\"", a1.getValue());
 		MDLAnim a2 = new MDLAnim();
-		try {
-			a2.parse(anim2);
-		} catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
+		a2.parse(anim2);
 		Assert.assertEquals(anim2, a2.toMDL());
 		Assert.assertArrayEquals(new Float[]{4000f, 5000f}, a2.getInterval());
 		Assert.assertArrayEquals(new Float[]{-132f, -129f, -0.605469f}, a2.getMinimumExtent());
@@ -43,11 +37,7 @@ public class MDLAnimTest {
 		Assert.assertEquals("\"Attack - 1\"", a2.getValue());
 		String s1 = "Anim {\n\tMinimumExtent { -132, -129, 7.6875 },\n\tMaximumExtent { 128, 131, 9 },\n\tBoundsRadius 367.698,\n}\n";
 		MDLAnim noname = new MDLAnim();
-		try {
-			noname.parse(s1);
-		} catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
+		noname.parse(s1);
 		Assert.assertEquals(s1, noname.toMDL());
 	}
 
