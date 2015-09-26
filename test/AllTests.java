@@ -12,7 +12,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		MDLMaterialTest.class, MDLMaterialsTest.class, MDLTVertexAnimTest.class, MDLTextureAnimsTest.class,
 		MDLMatrixTest.class, MDLGeosetTest.class, MDLGeosetAnimTest.class, MDLBoneTest.class, MDLHelperTest.class,
 		MDLAttachmentTest.class, MDLPivotPointsTest.class, MDLParticleTest.class, MDLParticleEmitterTest.class,
-		MDLParticleEmitter2Test.class, MDLRibbonEmitterTest.class, MDLLightTest.class, MDLCameraTest.class })
+		MDLParticleEmitter2Test.class, MDLRibbonEmitterTest.class, MDLLightTest.class, MDLCameraTest.class,
+		MDLCollisionShapeTest.class })
 public class AllTests {
 
 }

@@ -1,5 +1,7 @@
 package io.github.picoledelimao.mdl;
 
+import java.util.List;
+
 import io.github.picoledelimao.mdl.core.MDLNotFoundException;
 import io.github.picoledelimao.mdl.core.MDLNumber;
 import io.github.picoledelimao.mdl.core.MDLObjectArray;
@@ -25,6 +27,8 @@ public class MDLModel extends MDLBoundedObject {
 	private MDLObjectArray<MDLParticleEmitter> particleEmitters;
 	private MDLObjectArray<MDLParticleEmitter2> particleEmitters2;
 	private MDLObjectArray<MDLRibbonEmitter> ribbonEmitters;
+	private MDLObjectArray<MDLCamera> cameras;
+	private MDLObjectArray<MDLCollisionShape> shapes;
 	
 	public MDLModel() {
 		super("Model");
@@ -46,11 +50,81 @@ public class MDLModel extends MDLBoundedObject {
 			this.particleEmitters = new MDLObjectArray<>("", false, MDLParticleEmitter.class.getDeclaredConstructor());
 			this.particleEmitters2 = new MDLObjectArray<>("", false, MDLParticleEmitter2.class.getDeclaredConstructor());
 			this.ribbonEmitters = new MDLObjectArray<>("", false, MDLRibbonEmitter.class.getDeclaredConstructor());
+			this.cameras = new MDLObjectArray<>("", false, MDLCamera.class.getDeclaredConstructor());
+			this.shapes = new MDLObjectArray<>("", false, MDLCollisionShape.class.getDeclaredConstructor());
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
+	public MDLSequences getSequences() {
+		return sequences;
+	}
+	
+	public MDLGlobalSequences getGlobalSequences() {
+		return globalSequences;
+	}
+	
+	public MDLTextures getTextures() {
+		return textures;
+	}
+	
+	public MDLMaterials getMaterials() {
+		return materials;
+	}
+	
+	public MDLTextureAnims getTextureAnims() {
+		return textureAnims;
+	}
+	
+	public List<MDLGeoset> getGeosets() {
+		return geosets.getObjects();
+	}
+	
+	public List<MDLGeosetAnim> getGeosetAnims() {
+		return geosetAnims.getObjects();
+	}
+	
+	public List<MDLBone> getBones() {
+		return bones.getObjects();
+	}
+	
+	public List<MDLLight> getLights() {
+		return lights.getObjects();
+	}
+	
+	public List<MDLHelper> getHelpers() {
+		return helpers.getObjects();
+	}
+	
+	public List<MDLAttachment> getAttachments() {
+		return attachments.getObjects();
+	}
+	
+	public MDLPivotPoints getPivotPoints() {
+		return pivotPoints;
+	}
+	
+	public List<MDLParticleEmitter> getParticleEmitters() {
+		return particleEmitters.getObjects();
+	}
+	
+	public List<MDLParticleEmitter2> getParticleEmitters2() {
+		return particleEmitters2.getObjects();
+	}
+	
+	public List<MDLRibbonEmitter> getRibbonEmitters() {
+		return ribbonEmitters.getObjects();
+	}
+	
+	public List<MDLCamera> getCameras() {
+		return cameras.getObjects();
+	}
+	
+	public List<MDLCollisionShape> getCollisionShapes() {
+		return shapes.getObjects();
+	}
+	
 	public int getNumGeosets() {
 		return geosets.getObjects().size();
 	}
@@ -105,7 +179,7 @@ public class MDLModel extends MDLBoundedObject {
 		String contents = parse(token.second, blendTime);
 		input = parse(token.first, version, sequences, globalSequences, textures, materials, textureAnims, 
 				geosets, geosetAnims, bones, lights, helpers, attachments, pivotPoints, particleEmitters, 
-				particleEmitters2, ribbonEmitters);
+				particleEmitters2, ribbonEmitters, cameras, shapes);
 		return new Pair<String, String>(input, contents);
 	}
 
@@ -115,7 +189,8 @@ public class MDLModel extends MDLBoundedObject {
 		sb.append(version.toMDL());
 		sb.append(print(new StringBuilder()));
 		sb.append(print(sequences, globalSequences, textures, materials, textureAnims, geosets, geosetAnims,
-				bones, lights, helpers, attachments, pivotPoints, particleEmitters, particleEmitters2, ribbonEmitters));
+				bones, lights, helpers, attachments, pivotPoints, particleEmitters, particleEmitters2, 
+				ribbonEmitters, cameras, shapes));
 		return sb.toString();
 	}
 	
