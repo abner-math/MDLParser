@@ -10,7 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		MDLBitmapTest.class, MDLTexturesTest.class, MDLEnumTest.class, MDLBooleanArrayTest.class,
 		MDLAnimationKeyTest.class, MDLAnimationKeysTest.class, MDLAnimatedObjectTest.class, MDLLayerTest.class,
 		MDLMaterialTest.class, MDLMaterialsTest.class, MDLTVertexAnimTest.class, MDLTextureAnimsTest.class,
-		MDLMatrixTest.class, MDLGeosetTest.class, MDLGeosetAnimTest.class, MDLBoneTest.class })
+		MDLMatrixTest.class, MDLGeosetTest.class, MDLGeosetAnimTest.class, MDLBoneTest.class, MDLHelperTest.class })
 public class AllTests {
 
 }
