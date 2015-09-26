@@ -62,7 +62,7 @@ public class MDLAnimationKeyTest {
 		Assert.assertEquals(10, frame3.getValue().getValue());
 		Assert.assertEquals(8, frame3.getTanValue().first.getValue());
 		Assert.assertEquals(12, frame3.getTanValue().second.getValue());
-		Assert.assertEquals("0: 10,\nInTan 8,\nOutTan 12,\n", frame3.toMDL());
+		Assert.assertEquals("0: 10,\n\tInTan 8,\n\tOutTan 12,\n", frame3.toMDL());
 	} 
 
 }

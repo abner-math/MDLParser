@@ -19,21 +19,22 @@ public class MDLAnimationKeys<T extends MDLNumeric> extends MDLObjectArray<MDLAn
 	
 	public MDLAnimationKeys(String name, Constructor<T> constructor, Object... constructorParams) throws NoSuchMethodException, SecurityException {
 		super(name, true, MDLAnimationKey.class.getDeclaredConstructor(Boolean.class, constructor.getClass(), constructorParams.getClass()), true, constructor, constructorParams);
-		this.interpolationType = new MDLEnum(true, "DontInterp", "Linear", "Hermite", "Bezier");
+		this.interpolationType = new MDLEnum(true, MDLInterpolationType.getStringValues());
 		this.globalSeqId = new MDLNumber<>("GlobalSeqId", -1, false);
 	}
 
-	public String getInterpolationType() {
-		return interpolationType.getValue();
+	public MDLInterpolationType getInterpolationType() {
+		return MDLInterpolationType.getValue(interpolationType.getValue());
 	}
 	
-	public void setInterpolationType(String newInterpolationType) throws MDLParserErrorException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		boolean showTanValue = newInterpolationType.equals("Hermite") || newInterpolationType.equals("Bezier");
+	public void setInterpolationType(MDLInterpolationType newInterpolationType) throws MDLParserErrorException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		if (newInterpolationType == null) throw new IllegalArgumentException("Interpolation type cannot be null.");
+		boolean showTanValue = newInterpolationType == MDLInterpolationType.HERMITE || newInterpolationType == MDLInterpolationType.BEZIER;
 		constructorParams[0] = showTanValue;
 		for (MDLAnimationKey key : objects) {
 			key.setShowTanValue(showTanValue);
 		}
-		this.interpolationType.setValue(newInterpolationType);
+		this.interpolationType.setValue(newInterpolationType.toString());
 	}
 	
 	public Integer getGlobalSeqId() {
@@ -51,7 +52,7 @@ public class MDLAnimationKeys<T extends MDLNumeric> extends MDLObjectArray<MDLAn
 		String contents = token.second;
 		contents = parse(contents, interpolationType, globalSeqId);
 		try {
-			setInterpolationType(interpolationType.getValue());
+			setInterpolationType(MDLInterpolationType.getValue(interpolationType.getValue()));
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			throw new IllegalAccessError("Could not set interpolation type.");
 		}

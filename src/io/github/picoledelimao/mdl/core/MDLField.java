@@ -16,7 +16,7 @@ public abstract class MDLField implements MDLElement {
 	}
 	
 	public void setName(String newName) {
-		Matcher matches = Pattern.compile("^[\\w|:]*$").matcher(newName);
+		Matcher matches = Pattern.compile("^[\\w|:|\\s]*$").matcher(newName);
 		if (!matches.find()) {
 			throw new RuntimeException("Illegal field name. Only [a-zA-Z_0-9:] is supported.");
 		}

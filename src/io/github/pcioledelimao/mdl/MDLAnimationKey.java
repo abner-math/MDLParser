@@ -33,7 +33,7 @@ public class MDLAnimationKey<T extends MDLNumeric> implements MDLElement {
 		setShowTanValue(showTanValue);
 	}
 
-	private Object[] getNewConstructorParams(String fieldName, Object[] constructorParams) {
+	public static Object[] getNewConstructorParams(String fieldName, Object[] constructorParams) {
 		Object[] newConstructorParams = new Object[constructorParams.length + 1];
 		newConstructorParams[0] = fieldName;
 		for (int i = 0; i < constructorParams.length; i++) {
