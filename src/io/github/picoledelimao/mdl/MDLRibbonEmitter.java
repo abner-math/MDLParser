@@ -8,7 +8,7 @@ import io.github.picoledelimao.mdl.core.MDLNumberArray;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public class MDLRibbonEmitter extends MDLTVertex {
+public class MDLRibbonEmitter extends MDLNode {
 
 	private MDLAnimatedObject<MDLNumber> heightAbove;
 	private MDLAnimatedObject<MDLNumber> heightBelow;

@@ -9,7 +9,7 @@ import io.github.picoledelimao.mdl.core.MDLNumberArray;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public class MDLParticleEmitter2 extends MDLTVertex {
+public class MDLParticleEmitter2 extends MDLNode {
 
 	private MDLBoolean alphaKey;
 	private MDLAnimatedObject<MDLNumber> speed;

@@ -8,7 +8,7 @@ import io.github.picoledelimao.mdl.core.MDLNumber;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public class MDLParticleEmitter extends MDLTVertex {
+public class MDLParticleEmitter extends MDLNode {
 
 	private MDLBoolean emitterUsesMDL;
 	private MDLBoolean emitterUsesTGA;

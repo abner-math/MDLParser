@@ -8,7 +8,7 @@ import io.github.picoledelimao.mdl.core.MDLNumber;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public class MDLBone extends MDLTVertex {
+public class MDLBone extends MDLNode {
 
 	private MDLBoolean geosetIdMultiple;
 	private MDLNumber<Integer> geosetId;

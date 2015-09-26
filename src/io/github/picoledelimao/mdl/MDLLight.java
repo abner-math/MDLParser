@@ -9,7 +9,7 @@ import io.github.picoledelimao.mdl.core.MDLNumberArray;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public class MDLLight extends MDLTVertex {
+public class MDLLight extends MDLNode {
 
 	private MDLEnum lightType;
 	private MDLAnimatedObject<MDLNumber> attenuationStart;

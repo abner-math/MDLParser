@@ -9,7 +9,7 @@ import io.github.picoledelimao.mdl.core.MDLNumber;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public abstract class MDLTVertex extends MDLTVertexAnim {
+public abstract class MDLNode extends MDLTVertexAnim {
 
 	protected MDLNumber<Integer> objectId;
 	protected MDLNumber<Integer> parentId;
@@ -20,7 +20,7 @@ public abstract class MDLTVertex extends MDLTVertexAnim {
 	protected MDLBoolean billboardedLockZ;
 	protected MDLBoolean cameraAnchored;
 	
-	public MDLTVertex(String name) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	public MDLNode(String name) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		super(name);
 		this.objectId = new MDLNumber<>("ObjectId", 0, true);
 		this.parentId = new MDLNumber<>("Parent", -1, false);

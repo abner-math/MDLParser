@@ -8,7 +8,7 @@ import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.MDLString;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public class MDLAttachment extends MDLTVertex {
+public class MDLAttachment extends MDLNode {
 
 	private MDLNumber<Integer> attachmentID; 
 	private MDLString path;
