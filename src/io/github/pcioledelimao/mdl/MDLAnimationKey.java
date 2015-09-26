@@ -2,7 +2,6 @@ package io.github.pcioledelimao.mdl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,13 +22,13 @@ public class MDLAnimationKey<T extends MDLNumeric> implements MDLElement {
 	private Object[] constructorParams;
 	private boolean showTanValue;
 
-	public MDLAnimationKey(boolean showTanValue, Constructor<T> constructor, Object... constructorParams) 
+	public MDLAnimationKey(Boolean showTanValue, Constructor constructor, Object... constructorParams) 
 			throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		setConstructor(constructor);
 		setConstructorParams(constructorParams);
 		if (showTanValue) {
-			inTan = constructor.newInstance(getNewConstructorParams("InTan", constructorParams));
-			outTan = constructor.newInstance(getNewConstructorParams("OutTan", constructorParams));
+			inTan = (T)constructor.newInstance(getNewConstructorParams("InTan", constructorParams));
+			outTan = (T)constructor.newInstance(getNewConstructorParams("OutTan", constructorParams));
 		}
 		setShowTanValue(showTanValue);
 	}
@@ -142,8 +141,8 @@ public class MDLAnimationKey<T extends MDLNumeric> implements MDLElement {
 	public String toMDL() {
 		StringBuilder sb = new StringBuilder(value.toMDL());
 		if (showTanValue) {
-			sb.append(inTan.toMDL());
-			sb.append(outTan.toMDL());
+			sb.append("\t").append(inTan.toMDL());
+			sb.append("\t").append(outTan.toMDL());
 		}
 		return sb.toString();
 	}

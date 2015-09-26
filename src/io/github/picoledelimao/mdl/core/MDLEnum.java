@@ -1,15 +1,13 @@
 package io.github.picoledelimao.mdl.core;
 
-public abstract class MDLEnum implements MDLElement {
+public class MDLEnum implements MDLElement {
 
 	private boolean required;
-	private String defaultValue;
 	private String[] allowedValues;
 	private String value;
 	
-	public MDLEnum(boolean required, String defaultValue, String... allowedValues) {
+	public MDLEnum(boolean required, String... allowedValues) {
 		setAllowedValues(allowedValues);
-		setDefaultValue(defaultValue);
 		setRequired(required);
 	}
 	
@@ -21,16 +19,6 @@ public abstract class MDLEnum implements MDLElement {
 		this.required = required;
 	}
 	
-	public String getDefaultValue() {
-		return defaultValue;
-	}
-	
-	public void setDefaultValue(String newDefaultValue) {
-		if (!newDefaultValue.equals(this.defaultValue) && isValid(newDefaultValue)) 
-			throw new IllegalArgumentException("Enum values must be unique.");
-		this.defaultValue = newDefaultValue;
-	}
-	
 	public String[] getAllowedValues() {
 		return allowedValues;
 	}
@@ -39,10 +27,19 @@ public abstract class MDLEnum implements MDLElement {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < values.length; j++) {
 				if (i == j) continue;
-				if (values[i].equals(values[j]) || values[i].equals(defaultValue)) return true;
+				if (values[i].equals(values[j])) return true;
 			}
 		}
 		return false;
+	}
+	
+	public String getDefaultValue() {
+		return allowedValues[0];
+	}
+	
+	public void setDefaultValue(String newDefaultValue) {
+		allowedValues[0] = newDefaultValue;
+		setAllowedValues(allowedValues);
 	}
 	
 	public void setAllowedValues(String[] newAllowedValues) {
@@ -67,9 +64,9 @@ public abstract class MDLEnum implements MDLElement {
 	
 	public void setValue(String newValue) throws MDLParserErrorException {
 		if ((newValue == null || newValue.isEmpty()) && !required) {
-			this.value = defaultValue;
+			this.value = allowedValues[0];
 		} else {
-			if (!newValue.equals(defaultValue) && !isValid(newValue)) 
+			if (!newValue.equals(allowedValues[0]) && !isValid(newValue)) 
 				throw new MDLParserErrorException("Value is not allowed on enum.");
 			this.value = newValue;
 		}
@@ -88,26 +85,33 @@ public abstract class MDLEnum implements MDLElement {
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<Integer, Integer> delimiter = getTokenDelimiter(input);
+		String lookAhead = input;
 		String newValue = null;
 		if (delimiter != null) {
 			for (String value : allowedValues) {
 				MDLBoolean b = new MDLBoolean(value);
-				b.parse(input);
+				lookAhead = b.parse(lookAhead).first;
 				if (b.getValue()) {
 					newValue = value;
+					break;
 				}
 			}
 		} else {
 			if (required) throw new MDLNotFoundException("Cannot find a value for enum.");
 		}
 		setValue(newValue);
-		return new Pair<String, String>(input, "");
+		return new Pair<String, String>(lookAhead, "");
 	}
 
 	@Override
 	public String toMDL() {
-		if (value.equals(defaultValue) && !required) return "";
+		if (value.equals(allowedValues[0]) && !required) return "";
 		return value + ",\n";
+	}
+	
+	@Override
+	public String toString() {
+		return toMDL();
 	}
 	
 }

@@ -10,7 +10,7 @@ import io.github.picoledelimao.mdl.core.MDLNumber;
 import io.github.picoledelimao.mdl.core.MDLNumberArray;
 import io.github.picoledelimao.mdl.core.Pair;
 
-public class MDLAnimationKeyFrame {
+public class MDLAnimationKeyTest {
 
 	@Test
 	public void test() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
