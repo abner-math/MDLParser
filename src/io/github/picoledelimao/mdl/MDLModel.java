@@ -20,6 +20,8 @@ public class MDLModel extends MDLBoundedObject {
 	private MDLObjectArray<MDLBone> bones;
 	private MDLObjectArray<MDLHelper> helpers;
 	private MDLObjectArray<MDLAttachment> attachments;
+	private MDLPivotPoints pivotPoints;
+	private MDLObjectArray<MDLParticleEmitter> particleEmitters;
 	
 	public MDLModel() {
 		super("Model");
@@ -36,6 +38,8 @@ public class MDLModel extends MDLBoundedObject {
 			this.bones = new MDLObjectArray<>("", false, MDLBone.class.getDeclaredConstructor());
 			this.helpers = new MDLObjectArray<>("", false, MDLHelper.class.getDeclaredConstructor());
 			this.attachments = new MDLObjectArray<>("", false, MDLAttachment.class.getDeclaredConstructor());
+			this.pivotPoints = new MDLPivotPoints();
+			this.particleEmitters = new MDLObjectArray<>("", false, MDLParticleEmitter.class.getDeclaredConstructor());
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new RuntimeException(e);
 		}
@@ -61,7 +65,7 @@ public class MDLModel extends MDLBoundedObject {
 		return attachments.getObjects().size();
 	}
 	public int getNumParticleEmitters() {
-		return 0;
+		return particleEmitters.getObjects().size();
 	}
 	
 	public int getNumParticleEmitters2() {
@@ -89,7 +93,7 @@ public class MDLModel extends MDLBoundedObject {
 		Pair<String, String> token = super.parse(input);
 		String contents = parse(token.second, blendTime);
 		input = parse(token.first, version, sequences, globalSequences, textures, materials, textureAnims, 
-				geosets, geosetAnims, bones, helpers, attachments);
+				geosets, geosetAnims, bones, helpers, attachments, pivotPoints, particleEmitters);
 		return new Pair<String, String>(input, contents);
 	}
 
@@ -99,7 +103,7 @@ public class MDLModel extends MDLBoundedObject {
 		sb.append(version.toMDL());
 		sb.append(print(new StringBuilder()));
 		sb.append(print(sequences, globalSequences, textures, materials, textureAnims, geosets, geosetAnims,
-				bones, helpers, attachments));
+				bones, helpers, attachments, pivotPoints, particleEmitters));
 		return sb.toString();
 	}
 	
