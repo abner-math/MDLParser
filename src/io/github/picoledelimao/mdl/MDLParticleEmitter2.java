@@ -52,7 +52,7 @@ public class MDLParticleEmitter2 extends MDLTVertex {
 		this.emissionRate = new MDLAnimatedObject<>("EmissionRate", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
 		this.width = new MDLAnimatedObject<>("Width", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
 		this.length = new MDLAnimatedObject<>("Length", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
-		this.visibility = new MDLAnimatedObject<>("Visibility", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
+		this.visibility = new MDLAnimatedObject<>("Visibility", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(1), true);
 		this.segmentColor = new MDLSegmentColor();
 		this.alpha = new MDLNumberArray<>("Alpha", Float.class, 3);
 		this.particleScaling = new MDLNumberArray<>("ParticleScaling", Float.class, 3);

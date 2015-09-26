@@ -27,7 +27,7 @@ public class MDLParticleEmitter extends MDLTVertex {
 		this.gravity = new MDLAnimatedObject<>("Gravity", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
 		this.longitude = new MDLAnimatedObject<>("Longitude", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
 		this.latitude = new MDLAnimatedObject<>("Latitude", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
-		this.visibility = new MDLAnimatedObject<>("Visibility", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(0), true);
+		this.visibility = new MDLAnimatedObject<>("Visibility", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(1), true);
 		this.particle = new MDLParticle();
 	}
 	

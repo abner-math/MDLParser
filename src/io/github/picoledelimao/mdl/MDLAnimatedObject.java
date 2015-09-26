@@ -58,9 +58,20 @@ public class MDLAnimatedObject<T extends MDLNumeric> implements MDLElement {
 		String contents = null;
 		showNone = false;
 		if (bounds != null) {
-			contents = input.substring(bounds.first, bounds.second);
-			contents = animatedValues.parse(contents).second;
-			showStatic = false;
+			try {
+				contents = input.substring(bounds.first, bounds.second);
+				contents = animatedValues.parse(contents).second;
+				showStatic = false;
+			} catch (Exception e) {
+				bounds = staticValue.getTokenDelimiter(input);
+				if (bounds != null) {
+					contents = input.substring(bounds.first, bounds.second);
+					contents = staticValue.parse(contents).second;
+					showStatic = true;
+				}  else {
+					showNone = true;
+				}
+			}
 		} else {
 			bounds = staticValue.getTokenDelimiter(input);
 			if (bounds != null) {
