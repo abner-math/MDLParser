@@ -46,6 +46,7 @@ public abstract class MDLField implements MDLElement {
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<Integer, Integer> bounds = getTokenDelimiter(input);
 		if (bounds == null) {
+			if (name.equals("ObjectId")) System.out.println("OIII: " +input);
 			throw new MDLNotFoundException("Could not find field " + name + ".");
 		}
 		String contents = input.substring(bounds.first, bounds.second);

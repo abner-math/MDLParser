@@ -1,5 +1,3 @@
-import static org.junit.Assert.*;
-
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Assert;

@@ -18,11 +18,13 @@ public class MDLModel extends MDLBoundedObject {
 	private MDLObjectArray<MDLGeoset> geosets;
 	private MDLObjectArray<MDLGeosetAnim> geosetAnims;
 	private MDLObjectArray<MDLBone> bones;
+	private MDLObjectArray<MDLLight> lights;
 	private MDLObjectArray<MDLHelper> helpers;
 	private MDLObjectArray<MDLAttachment> attachments;
 	private MDLPivotPoints pivotPoints;
 	private MDLObjectArray<MDLParticleEmitter> particleEmitters;
 	private MDLObjectArray<MDLParticleEmitter2> particleEmitters2;
+	private MDLObjectArray<MDLRibbonEmitter> ribbonEmitters;
 	
 	public MDLModel() {
 		super("Model");
@@ -37,11 +39,13 @@ public class MDLModel extends MDLBoundedObject {
 			this.geosets = new MDLObjectArray<>("", false, MDLGeoset.class.getDeclaredConstructor());
 			this.geosetAnims = new MDLObjectArray<>("", false, MDLGeosetAnim.class.getDeclaredConstructor());
 			this.bones = new MDLObjectArray<>("", false, MDLBone.class.getDeclaredConstructor());
+			this.lights = new MDLObjectArray<>("", false, MDLLight.class.getDeclaredConstructor());
 			this.helpers = new MDLObjectArray<>("", false, MDLHelper.class.getDeclaredConstructor());
 			this.attachments = new MDLObjectArray<>("", false, MDLAttachment.class.getDeclaredConstructor());
 			this.pivotPoints = new MDLPivotPoints();
 			this.particleEmitters = new MDLObjectArray<>("", false, MDLParticleEmitter.class.getDeclaredConstructor());
 			this.particleEmitters2 = new MDLObjectArray<>("", false, MDLParticleEmitter2.class.getDeclaredConstructor());
+			this.ribbonEmitters = new MDLObjectArray<>("", false, MDLRibbonEmitter.class.getDeclaredConstructor());
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new RuntimeException(e);
 		}
@@ -63,9 +67,14 @@ public class MDLModel extends MDLBoundedObject {
 		return bones.getObjects().size();
 	}
 	
+	public int getNumLights() {
+		return lights.getObjects().size();
+	}
+	
 	public int getNumAttachments() {
 		return attachments.getObjects().size();
 	}
+	
 	public int getNumParticleEmitters() {
 		return particleEmitters.getObjects().size();
 	}
@@ -75,7 +84,7 @@ public class MDLModel extends MDLBoundedObject {
 	}
 	
 	public int getNumRibbonEmitters() {
-		return 0;
+		return ribbonEmitters.getObjects().size();
 	}
 	
 	public int getBlendTime() {
@@ -95,8 +104,8 @@ public class MDLModel extends MDLBoundedObject {
 		Pair<String, String> token = super.parse(input);
 		String contents = parse(token.second, blendTime);
 		input = parse(token.first, version, sequences, globalSequences, textures, materials, textureAnims, 
-				geosets, geosetAnims, bones, helpers, attachments, pivotPoints, particleEmitters, 
-				particleEmitters2);
+				geosets, geosetAnims, bones, lights, helpers, attachments, pivotPoints, particleEmitters, 
+				particleEmitters2, ribbonEmitters);
 		return new Pair<String, String>(input, contents);
 	}
 
@@ -106,7 +115,7 @@ public class MDLModel extends MDLBoundedObject {
 		sb.append(version.toMDL());
 		sb.append(print(new StringBuilder()));
 		sb.append(print(sequences, globalSequences, textures, materials, textureAnims, geosets, geosetAnims,
-				bones, helpers, attachments, pivotPoints, particleEmitters, particleEmitters2));
+				bones, lights, helpers, attachments, pivotPoints, particleEmitters, particleEmitters2, ribbonEmitters));
 		return sb.toString();
 	}
 	
@@ -116,6 +125,7 @@ public class MDLModel extends MDLBoundedObject {
 		MDLNumber<Integer> numGeosetAnims = new MDLNumber<>("NumGeosetAnims", 0, false);
 		MDLNumber<Integer> numHelpers = new MDLNumber<>("NumHelpers", 0, false);
 		MDLNumber<Integer> numBones = new MDLNumber<>("NumBones", 0, false);
+		MDLNumber<Integer> numLights = new MDLNumber<>("NumLights", 0, false);
 		MDLNumber<Integer> numAttachments = new MDLNumber<>("NumAttachments", 0, false);
 		MDLNumber<Integer> numParticleEmitters = new MDLNumber<>("NumParticleEmitters", 0, false);
 		MDLNumber<Integer> numParticleEmitters2 = new MDLNumber<>("NumParticleEmitters2", 0, false);
@@ -124,11 +134,12 @@ public class MDLModel extends MDLBoundedObject {
 		numGeosetAnims.setValue(getNumGeosetAnims());
 		numHelpers.setValue(getNumHelpers());
 		numBones.setValue(getNumBones());
+		numLights.setValue(getNumLights());
 		numAttachments.setValue(getNumAttachments());
 		numParticleEmitters.setValue(getNumParticleEmitters());
 		numParticleEmitters2.setValue(getNumParticleEmitters2());
 		numRibbonEmitters.setValue(getNumRibbonEmitters());
-		return super.print(print(numGeosets, numGeosetAnims, numHelpers, numBones, numAttachments, numParticleEmitters,
+		return super.print(print(numGeosets, numGeosetAnims, numHelpers, numBones, numLights, numAttachments, numParticleEmitters,
 				numParticleEmitters2, numRibbonEmitters, blendTime, minimumExtent, maximumExtent, boundsRadius));
 	}
 	
