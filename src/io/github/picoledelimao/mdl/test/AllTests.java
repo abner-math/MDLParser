@@ -9,7 +9,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		MDLVersionTest.class, MDLAnimTest.class, MDLSequencesTest.class, MDLGlobalSequencesTest.class, 
 		MDLBitmapTest.class, MDLTexturesTest.class, MDLEnumTest.class, MDLBooleanArrayTest.class,
 		MDLAnimationKeyTest.class, MDLAnimationKeysTest.class, MDLAnimatedObjectTest.class, MDLLayerTest.class,
-		MDLMaterialTest.class, MDLMaterialsTest.class, MDLTVertexAnimTest.class, MDLTextureAnimsTest.class })
+		MDLMaterialTest.class, MDLMaterialsTest.class, MDLTVertexAnimTest.class, MDLTextureAnimsTest.class,
+		MDLMatrixTest.class, MDLGeosetTest.class })
 public class AllTests {
 
 }

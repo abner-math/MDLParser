@@ -41,6 +41,14 @@ public class MDLAnimTest {
 		Assert.assertEquals(100, a2.getRarity(), 0);
 		Assert.assertTrue(a2.isNonLooping());
 		Assert.assertEquals("\"Attack - 1\"", a2.getValue());
+		String s1 = "Anim {\n\tMinimumExtent { -132, -129, 7.6875 },\n\tMaximumExtent { 128, 131, 9 },\n\tBoundsRadius 367.698,\n}\n";
+		MDLAnim noname = new MDLAnim();
+		try {
+			noname.parse(s1);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+		Assert.assertEquals(s1, noname.toMDL());
 	}
 
 }

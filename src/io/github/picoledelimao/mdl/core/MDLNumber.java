@@ -7,10 +7,9 @@ public class MDLNumber<T extends Number & Comparable> extends MDLNumeric<T> impl
 	
 	private T value;
 	private T defaultValue;
-	private boolean required;
 	
 	public MDLNumber(String name, T defaultValue, Boolean required) {
-		super(name, (Class<T>)getActualClass(defaultValue));
+		super(name, (Class<T>)getActualClass(defaultValue), required);
 		setValue(defaultValue);
 		setDefaultValue(defaultValue);
 		setRequired(required);
@@ -45,14 +44,6 @@ public class MDLNumber<T extends Number & Comparable> extends MDLNumeric<T> impl
 	
 	public void setDefaultValue(T newDefaultValue) {
 		this.defaultValue = newDefaultValue;
-	}
-	
-	public boolean isRequired() {
-		return required;
-	}
-	
-	public void setRequired(boolean required) {
-		this.required = required;
 	}
 	
 	@Override

@@ -16,7 +16,7 @@ public class MDLAnim extends MDLBoundedObject {
 	
 	public MDLAnim() {
 		super("Anim");
-		this.interval = new MDLNumberArray<>("Interval", Float.class, 2);
+		this.interval = new MDLNumberArray<>("Interval", Float.class, 2, false);
 		this.rarity = new MDLNumber<>("Rarity", 0.0f, false);
 		this.moveSpeed = new MDLNumber<>("MoveSpeed", 0.0f, false);
 		this.nonLooping = new MDLBoolean("NonLooping");

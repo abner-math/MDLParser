@@ -2,6 +2,7 @@ package io.github.picoledelimao.mdl;
 
 import io.github.picoledelimao.mdl.core.MDLNotFoundException;
 import io.github.picoledelimao.mdl.core.MDLNumber;
+import io.github.picoledelimao.mdl.core.MDLObjectArray;
 import io.github.picoledelimao.mdl.core.MDLParserErrorException;
 import io.github.picoledelimao.mdl.core.Pair;
 
@@ -13,6 +14,8 @@ public class MDLModel extends MDLBoundedObject {
 	private MDLGlobalSequences globalSequences;
 	private MDLTextures textures;
 	private MDLMaterials materials;
+	private MDLTextureAnims textureAnims;
+	private MDLObjectArray<MDLGeoset> geosets;
 	
 	public MDLModel() {
 		super("Model");
@@ -23,13 +26,15 @@ public class MDLModel extends MDLBoundedObject {
 			this.globalSequences = new MDLGlobalSequences();
 			this.textures = new MDLTextures();
 			this.materials = new MDLMaterials();
+			this.textureAnims = new MDLTextureAnims();
+			this.geosets = new MDLObjectArray<>("", false, MDLGeoset.class.getDeclaredConstructor());
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public int getNumGeosets() {
-		return 0;
+		return geosets.getObjects().size();
 	}
 	
 	public int getNumGeosetAnims() {
@@ -75,8 +80,17 @@ public class MDLModel extends MDLBoundedObject {
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);
 		String contents = parse(token.second, blendTime);
-		input = parse(token.first, version, sequences, globalSequences, textures, materials);
+		input = parse(token.first, version, sequences, globalSequences, textures, materials, textureAnims, geosets);
 		return new Pair<String, String>(input, contents);
+	}
+
+	@Override
+	public String toMDL() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(version.toMDL());
+		sb.append(print(new StringBuilder()));
+		sb.append(print(sequences, globalSequences, textures, materials, textureAnims, geosets));
+		return sb.toString();
 	}
 	
 	@Override
@@ -99,15 +113,6 @@ public class MDLModel extends MDLBoundedObject {
 		numRibbonEmitters.setValue(getNumRibbonEmitters());
 		return super.print(print(numGeosets, numGeosetAnims, numHelpers, numBones, numAttachments, numParticleEmitters,
 				numParticleEmitters2, numRibbonEmitters, blendTime, minimumExtent, maximumExtent, boundsRadius));
-	}
-	
-	@Override
-	public String toMDL() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(version.toMDL());
-		sb.append(print(new StringBuilder()));
-		sb.append(print(sequences, globalSequences, textures, materials));
-		return sb.toString();
 	}
 	
 }

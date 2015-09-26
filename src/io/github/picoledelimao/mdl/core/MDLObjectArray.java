@@ -5,14 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MDLObjectArray<T extends MDLElement> extends MDLObject {
+public class MDLObjectArray<T extends MDLElement> extends MDLObject implements MDLIterable<T> {
 
 	protected Constructor<T> constructor;
 	protected Object[] constructorParams;
 	protected boolean showQuantity;
 	protected List<T> objects;
 	
-	public MDLObjectArray(String name, boolean showQuantity, Constructor<T> constructor, Object... constructorParams) {
+	public MDLObjectArray(String name, Boolean showQuantity, Constructor<T> constructor, Object... constructorParams) {
 		super(name);
 		setConstructor(constructor);
 		setConstructorParams(constructorParams);
@@ -61,6 +61,9 @@ public abstract class MDLObjectArray<T extends MDLElement> extends MDLObject {
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);
 		String contents = token.second;
+		if (name.isEmpty()) {
+			contents = input;
+		}
 		objects.clear();
 		while (true) {
 			try {
@@ -84,7 +87,21 @@ public abstract class MDLObjectArray<T extends MDLElement> extends MDLObject {
 		for (T obj : objects) {
 			sb.append(obj.toMDL());
 		}
+		if (name.isEmpty()) return sb;
 		return super.print(sb);
+	}
+	
+	@Override
+	public int size() {
+		int size = 0;
+		for (MDLElement e : objects) {
+			if (e instanceof MDLIterable) {
+				size += ((MDLIterable)e).size();
+			} else {
+				size += 1;
+			}
+		}
+		return size;
 	}
 	
 }
