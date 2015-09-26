@@ -16,6 +16,7 @@ public class MDLAnimatedObject<T extends MDLNumeric> implements MDLElement {
 	private T staticValue;
 	private MDLAnimationKeys<T> animatedValues;
 	private boolean showStatic;
+	private boolean showNone;
 	
 	public MDLAnimatedObject(String name, Constructor<T> constructor, Object... constructorParams) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		setName(name); 
@@ -42,6 +43,10 @@ public class MDLAnimatedObject<T extends MDLNumeric> implements MDLElement {
 		this.showStatic = showStatic;
 	}
 
+	public Object getValue() {
+		return showStatic ? staticValue : animatedValues;
+	}
+	
 	@Override
 	public Pair<Integer, Integer> getTokenDelimiter(String input) {
 		Pair<Integer, Integer> animatedDelimiter = animatedValues.getTokenDelimiter(input);
@@ -55,21 +60,27 @@ public class MDLAnimatedObject<T extends MDLNumeric> implements MDLElement {
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<Integer, Integer> bounds = animatedValues.getTokenDelimiter(input);
 		String contents = null;
+		showNone = false;
 		if (bounds != null) {
 			contents = input.substring(bounds.first, bounds.second);
 			contents = animatedValues.parse(contents).second;
 			showStatic = false;
 		} else {
 			bounds = staticValue.getTokenDelimiter(input);
-			contents = input.substring(bounds.first, bounds.second);
-			contents = staticValue.parse(contents).second;
-			showStatic = true;
+			if (bounds != null) {
+				contents = input.substring(bounds.first, bounds.second);
+				contents = staticValue.parse(contents).second;
+				showStatic = true;
+			}  else {
+				showNone = true;
+			}
 		}
-		return new Pair<String, String>(MDLField.sliceString(input, bounds), contents);
+		return new Pair<String, String>(bounds != null ? MDLField.sliceString(input, bounds) : input, contents);
 	}
 
 	@Override
 	public String toMDL() {
+		if (showNone) return "";
 		if (showStatic) {
 			return staticValue.toMDL();
 		} else {

@@ -2,13 +2,23 @@ package io.github.picoledelimao.mdl.core;
 
 public class MDLEnum implements MDLElement {
 
+	private String name;
 	private boolean required;
 	private String[] allowedValues;
 	private String value;
 	
-	public MDLEnum(boolean required, String... allowedValues) {
+	public MDLEnum(String name, boolean required, String... allowedValues) {
+		setName(name);
 		setAllowedValues(allowedValues);
 		setRequired(required);
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String newName) {
+		this.name = newName;
 	}
 	
 	public boolean isRequired() {
@@ -75,7 +85,7 @@ public class MDLEnum implements MDLElement {
 	@Override
 	public Pair<Integer, Integer> getTokenDelimiter(String input) {
 		for (String value : allowedValues) {
-			MDLField obj = new MDLField(value) { };
+			MDLField obj = new MDLField((name != null && !name.isEmpty() ? name + " " : "") + value) { };
 			Pair<Integer, Integer> delimiter = obj.getTokenDelimiter(input);
 			if (delimiter != null) return delimiter;
 		}
@@ -89,7 +99,7 @@ public class MDLEnum implements MDLElement {
 		String newValue = null;
 		if (delimiter != null) {
 			for (String value : allowedValues) {
-				MDLBoolean b = new MDLBoolean(value);
+				MDLBoolean b = new MDLBoolean((name != null && !name.isEmpty() ? name + " " : "") + value);
 				lookAhead = b.parse(lookAhead).first;
 				if (b.getValue()) {
 					newValue = value;
@@ -106,7 +116,7 @@ public class MDLEnum implements MDLElement {
 	@Override
 	public String toMDL() {
 		if (value.equals(allowedValues[0]) && !required) return "";
-		return value + ",\n";
+		return (name != null && !name.isEmpty() ? name + " " : "") + value + ",\n";
 	}
 	
 	@Override

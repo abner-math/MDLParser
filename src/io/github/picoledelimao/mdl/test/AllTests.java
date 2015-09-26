@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ MDLBooleanTest.class, MDLNumberArrayTest.class, MDLNumberTest.class, MDLStringTest.class,
 		MDLVersionTest.class, MDLAnimTest.class, MDLSequencesTest.class, MDLGlobalSequencesTest.class, 
 		MDLBitmapTest.class, MDLTexturesTest.class, MDLEnumTest.class, MDLBooleanArrayTest.class,
-		MDLAnimationKeyTest.class, MDLAnimationKeysTest.class, MDLAnimatedObjectTest.class })
+		MDLAnimationKeyTest.class, MDLAnimationKeysTest.class, MDLAnimatedObjectTest.class, MDLLayerTest.class })
 public class AllTests {
 
 }

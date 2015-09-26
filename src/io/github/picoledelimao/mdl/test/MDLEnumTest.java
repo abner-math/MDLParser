@@ -11,7 +11,7 @@ public class MDLEnumTest {
 	@Test
 	public void test() throws MDLParserErrorException {
 		String easy1Correct = "Linear,";
-		MDLEnum e1 = new MDLEnum(true, "None", "Linear", "Hermite", "Bezier") { };
+		MDLEnum e1 = new MDLEnum("", true, "None", "Linear", "Hermite", "Bezier") { };
 		try {
 			e1.parse(easy1Correct);
 		} catch (Exception e) { 
@@ -31,7 +31,7 @@ public class MDLEnumTest {
 		try {
 			e1.setAllowedValues(new String[]{"a", "b", "b", "c"});
 		} catch (Exception e) { }
-		MDLEnum e2 = new MDLEnum(false, "A", "B", "C") { };
+		MDLEnum e2 = new MDLEnum("", false, "A", "B", "C") { };
 		try {
 			e2.parse(easy1Correct);
 		} catch (Exception e) {

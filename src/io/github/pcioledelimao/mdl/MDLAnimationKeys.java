@@ -19,7 +19,7 @@ public class MDLAnimationKeys<T extends MDLNumeric> extends MDLObjectArray<MDLAn
 	
 	public MDLAnimationKeys(String name, Constructor<T> constructor, Object... constructorParams) throws NoSuchMethodException, SecurityException {
 		super(name, true, MDLAnimationKey.class.getDeclaredConstructor(Boolean.class, constructor.getClass(), constructorParams.getClass()), true, constructor, constructorParams);
-		this.interpolationType = new MDLEnum(true, MDLInterpolationType.getStringValues());
+		this.interpolationType = new MDLEnum("", true, MDLInterpolationType.getStringValues());
 		this.globalSeqId = new MDLNumber<>("GlobalSeqId", -1, false);
 	}
 
