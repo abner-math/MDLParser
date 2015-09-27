@@ -16,7 +16,7 @@ public class MDLAttachment extends MDLNode {
 	
 	public MDLAttachment() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		super("Attachment");
-		this.attachmentID = new MDLNumber<>("AttachmentID", 0, true);
+		this.attachmentID = new MDLNumber<>("AttachmentID", 0, false);
 		this.path = new MDLString("Path", false);
 		this.visibility = new MDLAnimatedObject<>("Visibility", MDLNumber.class.getDeclaredConstructor(String.class, Number.class, Boolean.class), new Float(1), true);
 	}
