@@ -13,7 +13,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		MDLMatrixTest.class, MDLGeosetTest.class, MDLGeosetAnimTest.class, MDLBoneTest.class, MDLHelperTest.class,
 		MDLAttachmentTest.class, MDLPivotPointsTest.class, MDLParticleTest.class, MDLParticleEmitterTest.class,
 		MDLParticleEmitter2Test.class, MDLRibbonEmitterTest.class, MDLLightTest.class, MDLCameraTest.class,
-		MDLCollisionShapeTest.class })
+		MDLCollisionShapeTest.class, MDLEventObjectTest.class })
 public class AllTests {
 
 }

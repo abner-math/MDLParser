@@ -31,7 +31,7 @@ public class MDLSequencesTest {
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
-		Assert.assertEquals(sequence4, s1.toMDL());
+		Assert.assertEquals("", s1.toMDL());
 		Assert.assertTrue(s1.getObjects().isEmpty());
 		String sequence5 = "";
 		try {
@@ -39,7 +39,7 @@ public class MDLSequencesTest {
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
-		Assert.assertEquals(sequence4, s1.toMDL());
+		Assert.assertEquals("", s1.toMDL());
 	}
 
 }

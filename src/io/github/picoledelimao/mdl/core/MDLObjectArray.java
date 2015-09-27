@@ -88,7 +88,10 @@ public class MDLObjectArray<T extends MDLElement> extends MDLObject implements M
 			sb.append(obj.toMDL());
 		}
 		if (name.isEmpty()) return sb;
-		return super.print(sb);
+		sb = super.print(sb);
+		if (sb.toString().equals(name + " 0 {\n}\n"))
+			return new StringBuilder();
+		return sb;
 	}
 	
 	@Override

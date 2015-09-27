@@ -1,36 +1,25 @@
 package io.github.picoledelimao.animationduplicator;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Scanner;
 
-import io.github.picoledelimao.mdl.core.MDLNotFoundException;
-import io.github.picoledelimao.mdl.core.MDLObject;
-import io.github.picoledelimao.mdl.core.MDLParserErrorException;
+import io.github.picoledelimao.mdl.MDLModel;
 public class AnimationDuplicator {
 
 	public static void readFile(String input, String output) {
-		/*try {
-			 FileReader inputFile = new FileReader(input);
-			 BufferedReader bufferReader = new BufferedReader(inputFile);
-			 StringBuilder sb = new StringBuilder();
-			 String line;
-			 while ((line = bufferReader.readLine()) != null) {
-				 sb.append(line + "\n");
-			 }
-			 bufferReader.close();
-			 MDLFile file = new MDLFile();
-			 file.parse(sb.toString());
-			 FileWriter outputFile = new FileWriter(output);
-			 outputFile.write(file.toMDL());
-			 outputFile.close();
+		try {
+			System.out.println("Reading file " + input + "...");
+			MDLModel model = MDLModel.readFromFile(input);
+			System.out.println("Saving to file " + output + "...");
+			model.writeToFile(output);
+			System.out.println("Done!");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		//readFile("C:\\Users\\Abner Matheus\\Desktop\\JuugoNew7.mdl", "C:\\Users\\Abner Matheus\\Desktop\\Tenso.mdl");
+		readFile("C:\\Users\\Abner Matheus\\Desktop\\Juugo.mdl", "C:\\Users\\Abner Matheus\\Desktop\\Tenso.mdl");
 		//System.out.println("FInished reading");
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		StringBuilder sb = new StringBuilder();
 		while (sc.hasNextLine()) {
 			sb.append(sc.nextLine()).append("\n");
@@ -45,7 +34,7 @@ public class AnimationDuplicator {
 		}
 		System.out.println(obj);
 		
-		sc.close();
+		sc.close();*/
 	}
 
 } 
