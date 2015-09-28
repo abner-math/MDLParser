@@ -25,6 +25,14 @@ public class MDLGeosetAnim extends MDLObject {
 		this.dropShadow = new MDLBoolean("DropShadow");
 	}
 
+	public MDLAnimatedObject<MDLNumber> getAlpha() {
+		return alpha;
+	}
+	
+	public MDLAnimatedObject<MDLNumberArray> getColor() {
+		return color;
+	}
+	
 	@Override
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		Pair<String, String> token = super.parse(input);

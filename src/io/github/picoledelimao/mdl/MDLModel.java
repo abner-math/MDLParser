@@ -196,7 +196,7 @@ public class MDLModel extends MDLBoundedObject {
 		this.modelName = newModelName;
 	}
 	
-	public static MDLModel readFromFile(String filename) throws IOException, MDLNotFoundException, MDLParserErrorException {
+	public static MDLModel parseFromFile(String filename) throws IOException, MDLNotFoundException, MDLParserErrorException {
 		 FileReader inputFile = new FileReader(filename);
 		 BufferedReader bufferReader = new BufferedReader(inputFile);
 		 StringBuilder sb = new StringBuilder();
