@@ -35,7 +35,7 @@ public class MDLString extends MDLField {
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		try {
 			Pair<String, String> token = super.parse(input);
-			Matcher matches = Pattern.compile("\"[^\"]*\"").matcher(token.second);
+			Matcher matches = Regexes.getMatches("\"[^\"]*\"", token.second);
 			if (!matches.find()) {
 				throw new MDLParserErrorException("Could not parse string for field " + name + ".");
 			}

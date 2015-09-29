@@ -3,7 +3,6 @@ package io.github.picoledelimao.mdl.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MDLBooleanArray extends MDLField {
 
@@ -45,12 +44,12 @@ public class MDLBooleanArray extends MDLField {
 		}
 		try {
 			Pair<String, String> token = super.parse(input);
-			Matcher matches = Pattern.compile(ARRAY_REGEX).matcher(token.second);
+			Matcher matches = Regexes.getMatches(ARRAY_REGEX, token.second);
 			if (!matches.find()) {
 				throw new MDLParserErrorException("Could not parse number array for field " + name + ".");
 			}
 			String contents = matches.group();
-			matches = Pattern.compile("\\w+").matcher(contents);
+			matches = Regexes.getMatches("\\w+", contents);
 			while (matches.find()) {
 				String name = matches.group();
 				for (MDLBoolean b : values) {

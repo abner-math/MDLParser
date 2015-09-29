@@ -24,12 +24,12 @@ public abstract class MDLObject extends MDLField {
 	@Override
 	public Pair<Integer, Integer> getTokenDelimiter(String input) {
 		String regex = "(^|(\\W+))" + name + "\\s*" + VALUE_REGEX + "?\\s*\\{";
-		Matcher matches = Pattern.compile(regex).matcher(input);
+		Matcher matches = Regexes.getMatches(regex, input);
 		if (!matches.find()) {
 			return null;
 		}
 		int nameStartIndex = input.substring(matches.start()).indexOf(name);
-		Matcher parenthesis = Pattern.compile("\\{|\\}").matcher(input.substring(matches.end()));
+		Matcher parenthesis = Regexes.getMatches("\\{|\\}", input.substring(matches.end()));
 		int balance = -1;
 		while (parenthesis.find()) {
 			String group = parenthesis.group();
@@ -54,7 +54,7 @@ public abstract class MDLObject extends MDLField {
 			int parenthesisStartOffset = contents.indexOf("{") + 1;
 			int parenthesisEndOffset = contents.length() - 1;
 			String strValue = contents.substring(0, parenthesisStartOffset - 1);
-			Matcher valueMatches = Pattern.compile(VALUE_REGEX).matcher(strValue);
+			Matcher valueMatches = Regexes.getMatches(VALUE_REGEX, strValue);
 			if (valueMatches.find()) {
 				setValue(valueMatches.group().replaceFirst("^\\s*", ""));
 			}

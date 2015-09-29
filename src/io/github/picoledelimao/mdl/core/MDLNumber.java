@@ -50,7 +50,7 @@ public class MDLNumber<T extends Number & Comparable> extends MDLNumeric<T> impl
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		try {
 			Pair<String, String> token = super.parse(input);
-			Matcher matches = Pattern.compile(NUMBER_REGEX).matcher(token.second);
+			Matcher matches = Regexes.getMatches(NUMBER_REGEX, token.second);
 			if (!matches.find()) {
 				throw new MDLParserErrorException("Could not parse number for field " + name + ".");
 			}

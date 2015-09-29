@@ -1,7 +1,6 @@
 package io.github.picoledelimao.mdl.core;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public abstract class MDLField implements MDLElement {
 
@@ -16,7 +15,7 @@ public abstract class MDLField implements MDLElement {
 	}
 	
 	public void setName(String newName) {
-		Matcher matches = Pattern.compile("^[\\w|:|\\s]*$").matcher(newName);
+		Matcher matches = Regexes.getMatches("^[\\w|:|\\s]*$", newName);
 		if (!matches.find()) {
 			throw new RuntimeException("Illegal field name. Only [a-zA-Z_0-9:] is supported.");
 		}
@@ -34,7 +33,7 @@ public abstract class MDLField implements MDLElement {
 	@Override
 	public Pair<Integer, Integer> getTokenDelimiter(String input) {
 		String regex = getFieldRegex(name);
-		Matcher matches = Pattern.compile(regex).matcher(input);
+		Matcher matches = Regexes.getMatches(regex, input);
 		if (!matches.find()) {
 			return null;
 		}

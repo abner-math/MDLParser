@@ -1,11 +1,8 @@
 package io.github.picoledelimao.mdl.core;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MDLNumberArray<T extends Number & Comparable> extends MDLNumeric<T> implements MDLIterable {
 
@@ -49,12 +46,12 @@ public class MDLNumberArray<T extends Number & Comparable> extends MDLNumeric<T>
 	public Pair<String, String> parse(String input) throws MDLNotFoundException, MDLParserErrorException {
 		try {
 			Pair<String, String> token = super.parse(input);
-			Matcher matches = Pattern.compile(ARRAY_REGEX).matcher(token.second);
+			Matcher matches = Regexes.getMatches(ARRAY_REGEX, token.second);
 			if (!matches.find()) {
 				throw new MDLParserErrorException("Could not parse number array for field " + name + ".");
 			}
 			String group = matches.group();
-			matches = Pattern.compile(NUMBER_REGEX).matcher(group);
+			matches = Regexes.getMatches(NUMBER_REGEX, group);
 			T[] values = (T[])Array.newInstance(clazz, 0);
 			while (matches.find()) {
 				T value = convertFromString(matches.group());
