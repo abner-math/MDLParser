@@ -89,7 +89,9 @@ public class MDLAnimationKey<T extends MDLNumeric> implements MDLElement {
 	public void setShowTanValue(boolean showTanValue) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		if (showTanValue && inTan == null || outTan == null) {
 			inTan = constructor.newInstance(getNewConstructorParams("InTan", constructorParams));
+			inTan.setRequired(true);
 			outTan = constructor.newInstance(getNewConstructorParams("OutTan", constructorParams));
+			outTan.setRequired(true);
 		}
 		this.showTanValue = showTanValue;
 	}
@@ -125,6 +127,7 @@ public class MDLAnimationKey<T extends MDLNumeric> implements MDLElement {
 		int keyId = Integer.valueOf(idMatches.group());
 		try {
 			value = constructor.newInstance(getNewConstructorParams(keyId + ":", constructorParams));
+			value.setRequired(true);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			throw new IllegalArgumentException("Unsupported constructor on MDLAnimationKey.");
 		}
